@@ -4,6 +4,7 @@ const schedule = require('node-schedule');
 
 const client = new Client({
     authStrategy: new LocalAuth(),
+    webVersionCache: { type: 'none' },
     puppeteer: { 
         args: [
             '--no-sandbox', 
@@ -12,7 +13,6 @@ const client = new Client({
             '--disable-accelerated-2d-canvas',
             '--no-first-run',
             '--no-zygote',
-            '--single-process',
             '--disable-gpu'
         ] 
     }
