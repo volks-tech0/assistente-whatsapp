@@ -20,6 +20,11 @@ const client = new Client({
 
 let tarefas = [];
 
+// Impede que o bot "crashe" e mostra o erro real
+process.on('unhandledRejection', (reason, promise) => {
+    console.log('⚠️ Erro interno capturado:', reason);
+});
+
 client.on('qr', (qr) => {
     qrcode.generate(qr, { small: true });
     console.log('Escaneie o QR Code acima com o seu WhatsApp!');
@@ -73,4 +78,5 @@ client.on('message_create', async (msg) => {
     }
 });
 
-client.initialize();
+// Inicia com tratamento de erro
+client.initialize().catch(err => console.error('❌ Erro ao iniciar o cliente:', err));
